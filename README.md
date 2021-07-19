@@ -8,19 +8,18 @@ Helpers for Open-Admin
 
 [Documentation](http://open-admin.org/docs/en/extension-helpers) 
 
->DEMO [helpers](http://demo.open-admin.org/helpers/scaffold)  
->Login using `admin/admin`
+## Screenshot
+
+![helpers screenshot](http://open-admin.org/docs/images/screenshots/ext-helpers.png)
+
 
 ## Installation
 
 ```
-// For open-admin 1.x
 $ composer require "open-admin-ext/helpers"
 ```
-
 Import menu items.
-
-```shell
+```
 $ php artisan admin:import helpers
 ```
 
