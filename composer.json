@@ -1,0 +1,33 @@
+{
+    "name": "open-admin-ext/helpers",
+    "description": "Helpers extension for open-admin",
+    "type": "library",
+    "keywords": ["open-admin", "helpers"],
+    "homepage": "https://github.com/open-admin-org/helpers",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "open-admin",
+            "email": "info@open-admin.org"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0",
+        "open-admin-org/open-admin": "dev-main"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~6.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "OpenAdmin\\Admin\\Helpers\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "OpenAdmin\\Admin\\Helpers\\HelpersServiceProvider"
+            ]
+        }
+    }
+}
