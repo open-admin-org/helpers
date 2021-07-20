@@ -2,16 +2,15 @@
 
 namespace OpenAdmin\Admin\Helpers\Controllers;
 
-use OpenAdmin\Admin\Facades\Admin;
-use OpenAdmin\Admin\Helpers\Scaffold\ControllerCreator;
-use OpenAdmin\Admin\Helpers\Scaffold\MigrationCreator;
-use OpenAdmin\Admin\Helpers\Scaffold\ModelCreator;
-use OpenAdmin\Admin\Layout\Content;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\MessageBag;
+use OpenAdmin\Admin\Facades\Admin;
+use OpenAdmin\Admin\Helpers\Scaffold\MigrationCreator;
+use OpenAdmin\Admin\Helpers\Scaffold\ModelCreator;
+use OpenAdmin\Admin\Layout\Content;
 
 class ScaffoldController extends Controller
 {
@@ -56,7 +55,7 @@ class ScaffoldController extends Controller
             if (in_array('migration', $request->get('create'))) {
                 $migrationName = 'create_'.$request->get('table_name').'_table';
 
-                $paths['migration'] = (new MigrationCreator(app('files'),"/"))->buildBluePrint(
+                $paths['migration'] = (new MigrationCreator(app('files'), '/'))->buildBluePrint(
                     $request->get('fields'),
                     $request->get('primary_key', 'id'),
                     $request->get('timestamps') == 'on',
@@ -67,13 +66,13 @@ class ScaffoldController extends Controller
             // 3. Run migrate.
             if (in_array('migrate', $request->get('create'))) {
                 Artisan::call('migrate');
-                $message .= "<br>".Artisan::output();
+                $message .= '<br>'.Artisan::output();
             }
 
             // 4. Create controller.
             if (in_array('controller', $request->get('create'))) {
                 Artisan::call('admin:controller \\\\'.addslashes($request->get('model_name')).' --name='.$this->getControllerName($request->get('controller_name')));
-                $message .= "<br>".Artisan::output();
+                $message .= '<br>'.Artisan::output();
             }
         } catch (\Exception $exception) {
 
@@ -86,10 +85,10 @@ class ScaffoldController extends Controller
         return $this->backWithSuccess($paths, $message);
     }
 
-    function getControllerName($str){
-        return last(explode("\\",$str));
+    public function getControllerName($str)
+    {
+        return last(explode('\\', $str));
     }
-
 
     protected function backWithException(\Exception $exception)
     {

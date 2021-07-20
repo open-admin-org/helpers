@@ -2,8 +2,6 @@
 
 namespace OpenAdmin\Admin\Helpers\Controllers;
 
-use OpenAdmin\Admin\Facades\Admin;
-use OpenAdmin\Admin\Layout\Content;
 use Exception;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Routing\Controller;
@@ -14,6 +12,8 @@ use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Str;
 use MongoDB\Driver\Command;
 use MongoDB\Driver\Manager;
+use OpenAdmin\Admin\Facades\Admin;
+use OpenAdmin\Admin\Layout\Content;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Output\Output;
