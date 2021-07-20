@@ -16,7 +16,7 @@ Helpers for Open-Admin
 ## Installation
 
 ```
-$ composer require "open-admin-ext/helpers"
+$ composer require open-admin-ext/helpers
 ```
 Import menu items.
 ```
