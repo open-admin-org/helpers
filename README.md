@@ -1,10 +1,14 @@
 Helpers for Open-Admin
 =========================
 
+<p align="center">
 
-[![Packagist](https://img.shields.io/packagist/l/open-admin-ext/helpers.svg?maxAge=2592000)](https://packagist.org/packages/open-admin-ext/helpers)
+[![StyleCI](https://styleci.io/repos/384432915/shield?branch=main)](https://styleci.io/repos/384432915)
+[![Packagist](https://img.shields.io/github/license/open-admin-org/helpers.svg?style=flat-square&color=brightgreen)](https://packagist.org/packages/open-admin-ext/helpers)
 [![Total Downloads](https://img.shields.io/packagist/dt/open-admin-ext/helpers.svg?style=flat-square)](https://packagist.org/packages/open-admin-ext/helpers)
 [![Pull request welcome](https://img.shields.io/badge/pr-welcome-green.svg?style=flat-square)]()
+
+</p>
 
 [Documentation](http://open-admin.org/docs/en/extension-helpers) 
 
