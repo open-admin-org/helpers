@@ -6,7 +6,7 @@ Helpers for Open-Admin
 [![StyleCI](https://styleci.io/repos/384432915/shield?branch=main)](https://styleci.io/repos/384432915)
 [![Packagist](https://img.shields.io/github/license/open-admin-org/helpers.svg?style=flat-square&color=brightgreen)](https://packagist.org/packages/open-admin-ext/helpers)
 [![Total Downloads](https://img.shields.io/packagist/dt/open-admin-ext/helpers.svg?style=flat-square)](https://packagist.org/packages/open-admin-ext/helpers)
-[![Pull request welcome](https://img.shields.io/badge/pr-welcome-green.svg?style=flat-square)]()
+[![Pull request welcome](https://img.shields.io/badge/pr-welcome-green.svg?style=flat-square&color=brightgreen)]()
 
 </p>
 
