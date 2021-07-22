@@ -10,7 +10,7 @@
     <!-- /.card-header -->
     <div class="card-body">
 
-        <form method="post" action="{{$action}}" class="needs-validation" id="scaffold" pjax-container>
+        <form method="post" action="{{$action}}" class="needs-validation" autocomplete="off" id="scaffold" pjax-container>
 
             <div class="card-body">
 
@@ -124,7 +124,7 @@
                                 @endforeach
                             </select>
                         </td>
-                        <td><input type="checkbox" class="form-check-input" name="fields[0][nullable]" /></td>
+                        <td><input type="checkbox" class="form-check-input" name="fields[0][nullable]" checked /></td>
                         <td>
                             <select class="form-select" style="width: 150px" name="fields[0][key]">
                                 {{--<option value="primary">Primary</option>--}}
@@ -223,7 +223,7 @@
                 @endforeach
             </select>
         </td>
-        <td><input type="checkbox" class="form-check-input" name="fields[__index__][nullable]" /></td>
+        <td><input type="checkbox" class="form-check-input" name="fields[__index__][nullable]" checked /></td>
         <td>
             <select class="form-select" style="width: 150px" name="fields[__index__][key]">
                 <option value="" selected>NULL</option>
