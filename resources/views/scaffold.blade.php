@@ -61,6 +61,10 @@
                             <input class="form-check-input" type="checkbox" checked value="migrate" id="migrate" name="create[]" />
                             <label for="migrate">Run migrate</label>
                         </div>
+                        <div class="pe-3">
+                            <input class="form-check-input" type="checkbox" checked value="menu_item" id="menu_item" name="create[]" />
+                            <label for="menu_item">Create menu item</label>
+                        </div>
                     </div>
                 </div>
 

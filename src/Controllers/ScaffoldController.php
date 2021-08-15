@@ -7,30 +7,30 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\MessageBag;
-use OpenAdmin\Admin\Facades\Admin;
 use OpenAdmin\Admin\Helpers\Scaffold\MigrationCreator;
 use OpenAdmin\Admin\Helpers\Scaffold\ModelCreator;
 use OpenAdmin\Admin\Layout\Content;
+use OpenAdmin\Admin\Auth\Database\Menu;
+use Illuminate\Support\Str;
 
 class ScaffoldController extends Controller
 {
-    public function index()
+    public function index(Content $content)
     {
-        return Admin::content(function (Content $content) {
-            $content->header('Scaffold');
+        $content->header('Scaffold');
 
-            $dbTypes = [
-                'string', 'integer', 'text', 'float', 'double', 'decimal', 'boolean', 'date', 'time',
-                'dateTime', 'timestamp', 'char', 'mediumText', 'longText', 'tinyInteger', 'smallInteger',
-                'mediumInteger', 'bigInteger', 'unsignedTinyInteger', 'unsignedSmallInteger', 'unsignedMediumInteger',
-                'unsignedInteger', 'unsignedBigInteger', 'enum', 'json', 'jsonb', 'dateTimeTz', 'timeTz',
-                'timestampTz', 'nullableTimestamps', 'binary', 'ipAddress', 'macAddress',
-            ];
+        $dbTypes = [
+            'string', 'integer', 'text', 'float', 'double', 'decimal', 'boolean', 'date', 'time',
+            'dateTime', 'timestamp', 'char', 'mediumText', 'longText', 'tinyInteger', 'smallInteger',
+            'mediumInteger', 'bigInteger', 'unsignedTinyInteger', 'unsignedSmallInteger', 'unsignedMediumInteger',
+            'unsignedInteger', 'unsignedBigInteger', 'enum', 'json', 'jsonb', 'dateTimeTz', 'timeTz',
+            'timestampTz', 'nullableTimestamps', 'binary', 'ipAddress', 'macAddress',
+        ];
 
-            $action = URL::current();
+        $action = URL::current();
 
-            $content->row(view('open-admin-helpers::scaffold', compact('dbTypes', 'action')));
-        });
+        $content->row(view('open-admin-helpers::scaffold', compact('dbTypes', 'action')));
+        return $content;
     }
 
     public function store(Request $request)
@@ -66,13 +66,19 @@ class ScaffoldController extends Controller
             // 3. Run migrate.
             if (in_array('migrate', $request->get('create'))) {
                 Artisan::call('migrate');
-                $message .= '<br>'.Artisan::output();
+                $message .= str_replace("Migrated:", "<br>Migrated:", Artisan::output());
             }
 
-            // 4. Create controller.
+            // 4. Create menu item.
+            if (in_array('menu_item', $request->get('create'))) {
+                $route = $this->createMenuItem($request);
+                $message .= '<br>Menu item: created, route: '.$route;
+            }
+
+            // 5. Create controller.
             if (in_array('controller', $request->get('create'))) {
                 Artisan::call('admin:controller \\\\'.addslashes($request->get('model_name')).' --name='.$this->getControllerName($request->get('controller_name')));
-                $message .= '<br>'.Artisan::output();
+                $message .= '<br>Controller:'.nl2br(trim(Artisan::output()));
             }
         } catch (\Exception $exception) {
 
@@ -85,10 +91,31 @@ class ScaffoldController extends Controller
         return $this->backWithSuccess($paths, $message);
     }
 
+    public function getRoute($request)
+    {
+        return Str::plural(Str::kebab(class_basename($request->get('model_name'))));
+    }
+
+    public function createMenuItem($request)
+    {
+        $route = $this->getRoute($request);
+        $lastOrder = Menu::max('order');
+        $root = [
+            'parent_id' => 0,
+            'order'     => $lastOrder++,
+            'title'     => ucfirst($route),
+            'icon'      => 'icon-file',
+            'uri'       => $route,
+        ];
+        $root = Menu::create($root);
+        return $route;
+    }
+
     public function getControllerName($str)
     {
         return last(explode('\\', $str));
     }
+
 
     protected function backWithException(\Exception $exception)
     {
@@ -108,7 +135,7 @@ class ScaffoldController extends Controller
             $messages[] = ucfirst($name).": $path";
         }
 
-        $messages[] = "<br />$message";
+        $messages[] = $message;
 
         $success = new MessageBag([
             'title'   => 'Success',

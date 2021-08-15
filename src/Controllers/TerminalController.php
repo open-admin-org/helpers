@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Str;
 use MongoDB\Driver\Command;
 use MongoDB\Driver\Manager;
-use OpenAdmin\Admin\Facades\Admin;
 use OpenAdmin\Admin\Layout\Content;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\ArgvInput;
@@ -20,13 +19,11 @@ use Symfony\Component\Console\Output\Output;
 
 class TerminalController extends Controller
 {
-    public function artisan()
+    public function artisan(Content $content)
     {
-        return Admin::content(function (Content $content) {
-            $content->header('Artisan terminal');
-
-            $content->row(view('open-admin-helpers::artisan', ['commands' => $this->organizedCommands()]));
-        });
+        $content->header('Artisan terminal');
+        $content->row(view('open-admin-helpers::artisan', ['commands' => $this->organizedCommands()]));
+        return $content;
     }
 
     public function runArtisan()
@@ -44,13 +41,11 @@ class TerminalController extends Controller
         return sprintf('<pre>%s</pre>', $output->getContent());
     }
 
-    public function database()
+    public function database(Content $content)
     {
-        return Admin::content(function (Content $content) {
-            $content->header('Database terminal');
-
-            $content->row(view('open-admin-helpers::database', ['connections' => $this->connections()]));
-        });
+        $content->header('Database terminal');
+        $content->row(view('open-admin-helpers::database', ['connections' => $this->connections()]));
+        return $content;
     }
 
     public function runDatabase()
