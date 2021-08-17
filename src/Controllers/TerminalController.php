@@ -23,6 +23,7 @@ class TerminalController extends Controller
     {
         $content->header('Artisan terminal');
         $content->row(view('open-admin-helpers::artisan', ['commands' => $this->organizedCommands()]));
+
         return $content;
     }
 
@@ -45,6 +46,7 @@ class TerminalController extends Controller
     {
         $content->header('Database terminal');
         $content->row(view('open-admin-helpers::database', ['connections' => $this->connections()]));
+
         return $content;
     }
 

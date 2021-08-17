@@ -7,11 +7,11 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\MessageBag;
+use Illuminate\Support\Str;
+use OpenAdmin\Admin\Auth\Database\Menu;
 use OpenAdmin\Admin\Helpers\Scaffold\MigrationCreator;
 use OpenAdmin\Admin\Helpers\Scaffold\ModelCreator;
 use OpenAdmin\Admin\Layout\Content;
-use OpenAdmin\Admin\Auth\Database\Menu;
-use Illuminate\Support\Str;
 
 class ScaffoldController extends Controller
 {
@@ -30,6 +30,7 @@ class ScaffoldController extends Controller
         $action = URL::current();
 
         $content->row(view('open-admin-helpers::scaffold', compact('dbTypes', 'action')));
+
         return $content;
     }
 
@@ -66,7 +67,7 @@ class ScaffoldController extends Controller
             // 3. Run migrate.
             if (in_array('migrate', $request->get('create'))) {
                 Artisan::call('migrate');
-                $message .= str_replace("Migrated:", "<br>Migrated:", Artisan::output());
+                $message .= str_replace('Migrated:', '<br>Migrated:', Artisan::output());
             }
 
             // 4. Create menu item.
@@ -108,6 +109,7 @@ class ScaffoldController extends Controller
             'uri'       => $route,
         ];
         $root = Menu::create($root);
+
         return $route;
     }
 
@@ -115,7 +117,6 @@ class ScaffoldController extends Controller
     {
         return last(explode('\\', $str));
     }
-
 
     protected function backWithException(\Exception $exception)
     {
