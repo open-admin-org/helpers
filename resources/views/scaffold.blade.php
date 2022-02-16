@@ -171,47 +171,16 @@
 
                 </div>
 
-                {{--<hr />--}}
-
-                {{--<h4>Relations</h4>--}}
-
-                {{--<table class="table table-hover" id="model-relations">--}}
-                    {{--<tbody>--}}
-                    {{--<tr>--}}
-                        {{--<th style="width: 200px">Relation name</th>--}}
-                        {{--<th>Type</th>--}}
-                        {{--<th>Related model</th>--}}
-                        {{--<th>forignKey</th>--}}
-                        {{--<th>OtherKey</th>--}}
-                        {{--<th>With Pivot</th>--}}
-                        {{--<th>Action</th>--}}
-                    {{--</tr>--}}
-                    {{--</tbody>--}}
-                {{--</table>--}}
-
-                {{--<hr style="margin-top: 0;"/>--}}
-
-                {{--<div class='form-inline margin' style="width: 100%">--}}
-
-                    {{--<div class='form-group'>--}}
-                        {{--<button type="button" class="btn btn-sm btn-success" id="add-model-relation"><i class="icon-plus"></i>&nbsp;&nbsp;Add relation</button>--}}
-                    {{--</div>--}}
-
-                {{--</div>--}}
 
             </div>
-            <!-- /.card-body -->
-            <div class="card-footer clearfix py-2">
+            <div class="card-footer clearfix">
                 <button type="submit" class="btn btn-info float-end">submit</button>
             </div>
 
             {{ csrf_field() }}
 
-            <!-- /.card-footer -->
         </form>
-
     </div>
-
 </div>
 
 <template id="table-field-tpl">

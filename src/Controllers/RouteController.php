@@ -20,17 +20,17 @@ class RouteController extends Controller
 
             $content->title(__('Routes'))->body(Admin::grid($model, function (Grid $grid) {
                 $colors = [
-                    'GET'    => 'green',
-                    'HEAD'   => 'gray',
-                    'POST'   => 'blue',
-                    'PUT'    => 'yellow',
-                    'DELETE' => 'red',
-                    'PATCH'  => 'aqua',
-                    'OPTIONS'=> 'light-blue',
+                    'GET'    => 'success',
+                    'HEAD'   => 'secondary',
+                    'POST'   => 'primary',
+                    'PUT'    => 'warning',
+                    'DELETE' => 'danger',
+                    'PATCH'  => 'info',
+                    'OPTIONS'=> 'secondary',
                 ];
 
                 $grid->method()->map(function ($method) use ($colors) {
-                    return "<span class=\"label bg-{$colors[$method]}\">$method</span>";
+                    return "<span class=\"badge bg-{$colors[$method]}\">$method</span>";
                 })->implode('&nbsp;');
 
                 $grid->uri()->display(function ($uri) {
