@@ -30,11 +30,25 @@ class MigrationCreator extends BaseMigrationCreator
 
         $stub = $this->files->get(__DIR__.'/stubs/create.stub');
 
-        $this->files->put($path, $this->populateStub($name, $stub, $table));
+        $this->files->put($path, $this->customPopulateStub($name, $stub, $table));
 
-        $this->firePostCreateHooks($table);
+        $this->customFirePostCreateHooks($table, $path);
 
         return $path;
+    }
+
+    /**
+     * Fire the registered post create hooks.
+     *
+     * @param  string|null  $table
+     * @param  string  $path
+     * @return void
+     */
+    protected function customFirePostCreateHooks($table, $path)
+    {
+        foreach ($this->postCreate as $callback) {
+            $callback($table, $path);
+        }
     }
 
     /**
@@ -46,7 +60,7 @@ class MigrationCreator extends BaseMigrationCreator
      *
      * @return mixed
      */
-    protected function populateStub($name, $stub, $table)
+    protected function customPopulateStub($name, $stub, $table)
     {
         return str_replace(
             ['DummyClass', 'DummyTable', 'DummyStructure'],
