@@ -40,8 +40,9 @@ class MigrationCreator extends BaseMigrationCreator
     /**
      * Fire the registered post create hooks.
      *
-     * @param  string|null  $table
-     * @param  string  $path
+     * @param string|null $table
+     * @param string      $path
+     *
      * @return void
      */
     protected function customFirePostCreateHooks($table, $path)
