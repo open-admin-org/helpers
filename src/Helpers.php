@@ -41,6 +41,8 @@ class Helpers extends Extension
 
     public static function import()
     {
+        parent::createPermission('Admin helpers', 'ext.helpers', 'helpers/*');
+
         $lastOrder = Menu::max('order');
 
         $root = [
@@ -49,6 +51,7 @@ class Helpers extends Extension
             'title'     => 'Helpers',
             'icon'      => 'icon-cogs',
             'uri'       => '',
+            'permission'=> 'ext.helpers',
         ];
 
         $root = Menu::create($root);
@@ -79,10 +82,10 @@ class Helpers extends Extension
         foreach ($menus as $menu) {
             $menu['parent_id'] = $root->id;
             $menu['order'] = $lastOrder++;
+            $menu['permission'] = 'ext.helpers';
 
             Menu::create($menu);
         }
 
-        parent::createPermission('Admin helpers', 'ext.helpers', 'helpers/*');
     }
 }
