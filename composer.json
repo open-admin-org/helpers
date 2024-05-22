@@ -13,7 +13,7 @@
     ],
     "require": {
         "php": ">=7.0.0",
-        "open-admin-org/open-admin": "~1.0"
+        "phphellcoder/open-admin": "dev-bugfix"
     },
     "autoload": {
         "psr-4": {
@@ -26,5 +26,11 @@
                 "OpenAdmin\\Admin\\Helpers\\HelpersServiceProvider"
             ]
         }
-    }
+    },
+	"repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/PHPHellCoder/open-admin"
+        }
+    ]
 }
