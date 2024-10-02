@@ -90,8 +90,8 @@ class TerminalController extends Controller
 
         foreach ($connections as $name => $_) {
             $redis[] = [
-                'value'     => "redis:$name",
-                'option'    => $name,
+                'value'  => "redis:$name",
+                'option' => $name,
             ];
         }
 
@@ -250,7 +250,7 @@ class StringOutput extends Output
         $this->output = '';
     }
 
-    protected function doWrite($message, $newline)
+    protected function doWrite(string $message, bool $newline) :void
     {
         $this->output .= $message.($newline ? "\n" : '');
     }
